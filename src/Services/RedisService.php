@@ -27,14 +27,6 @@ class RedisService
     }
 
     /**
-     * @return Predis\Client
-     */
-    public function redis()
-    {
-        return $this->redis;
-    }
-
-    /**
      * @param $key
      * @return mixed
      */

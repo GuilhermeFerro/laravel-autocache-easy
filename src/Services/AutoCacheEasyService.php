@@ -6,7 +6,6 @@ use Predis\Client;
 
 class AutoCacheEasyService extends RedisService
 {
-    private $redis;
     private $keyPrefix;
     private $keyPrefixSeparetor;
 
