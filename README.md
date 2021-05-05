@@ -58,7 +58,7 @@ autocacheeasy()->remember(string $key, callable $callback)
 autocacheeasy()->retriver(string $key, callable $callback, $all = false)
 ```
 
-- Methods Packages Inspire/Dependencie
+### Methods Packages Inspire/Dependencie
 
 `EN`
 - By using this package, you still retain all the functions of the dependency package.
@@ -66,13 +66,24 @@ autocacheeasy()->retriver(string $key, callable $callback, $all = false)
 `PT-BR`
 - Ao usar este pacote, você ainda mantém todas as funções do pacote de dependência.
 
+##### Method Package Depedence `predis/predis`
+`EN`
+- To access the predis directly
+
+`PT-BR`
+- Para ter acesso ao predis diretamente
+
+``` php
+autocacheeasy()->redis()
+``` 
 ##### Method Package Inspire `amitavroy/rediscache`
-- autocacheeasy()
->
-> ->get() 
->
-> ->set() 
->
-> ->forget() 
->
-> ->getAll() 
+
+``` php
+autocacheeasy()->get($key) 
+
+autocacheeasy()->set($key, $value) 
+
+autocacheeasy()->getAll($key) 
+
+autocacheeasy()->forget($key, $wildcard = false) 
+``` 

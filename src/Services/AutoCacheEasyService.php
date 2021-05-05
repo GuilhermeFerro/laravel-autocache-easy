@@ -4,7 +4,7 @@ namespace Gsferro\AutoCacheEasy\Services;
 
 use Predis\Client;
 
-class AutoCacheEasyService
+class AutoCacheEasyService extends RedisService
 {
     private $redis;
     private $keyPrefix;
@@ -20,7 +20,7 @@ class AutoCacheEasyService
      */
     public function __construct(string $keyPrefix = null, string $keyPrefixSeparetor = ':')
     {
-        $this->redis              = new RedisService();
+        parent::__construct();
         $this->keyPrefix          = $keyPrefix;
         $this->keyPrefixSeparetor = $keyPrefixSeparetor;
 

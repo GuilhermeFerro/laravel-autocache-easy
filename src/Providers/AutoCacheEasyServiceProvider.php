@@ -7,13 +7,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AutoCacheEasyServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot() { }
+
+    public function register()
     {
         // em minusculo
         app()->bind('autocacheeasy', function () {
             return new AutoCacheEasyService();
         });
     }
-
-    public function register() { }
 }

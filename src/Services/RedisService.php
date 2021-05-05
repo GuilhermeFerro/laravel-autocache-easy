@@ -13,7 +13,7 @@ use Predis\Client;
 class RedisService
 {
     /**
-     * @var Client
+     * @var Predis\Client
      */
     public $redis;
 
@@ -24,6 +24,14 @@ class RedisService
     {
         $connections = config('database.redis.cache');
         $this->redis = new Client($connections);
+    }
+
+    /**
+     * @return Predis\Client
+     */
+    public function redis()
+    {
+        return $this->redis;
     }
 
     /**

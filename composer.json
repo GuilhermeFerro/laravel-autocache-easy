@@ -9,7 +9,10 @@
     "autoload": {
         "psr-4": {
             "Gsferro\\AutoCacheEasy\\": "src"
-        }
+        },
+        "files": [
+            "src\\Helpers\\autocacheeasy.php"
+        ]
     },
     "license": "MIT",
     "authors": [
