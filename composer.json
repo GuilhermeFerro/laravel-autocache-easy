@@ -1,0 +1,38 @@
+{
+    "name": "gsferro/autocacheeasy",
+    "description": "Package to perform the autocache in an easy way in Laravel with Redis\n",
+    "type": "library",
+    "version": "1.0.0",
+    "require": {
+        "predis/predis": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gsferro\\AutoCacheEasy\\": "src"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guilherme Ferro",
+            "email": "gsferroti@gmail.com",
+            "homepage": "https://packagist.org/packages/gsferro/"
+        },
+        {
+            "name": "Amitav Roy",
+            "email": "reachme@amitavroy.com",
+            "role": "Inspire",
+            "homepage": "https://www.youtube.com/watch?v=i00bZ2EmE6A&ab_channel=AmitavRoy"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gsferro\\AutoCacheEasy\\Providers\\AutoCacheEasyServiceProvider"
+            ],
+            "aliases": {
+                "AutoCacheEasy": "Gsferro\\AutoCacheEasy\\Facades\\AutoCacheEasyFacade"
+            }
+        }
+    }
+}
