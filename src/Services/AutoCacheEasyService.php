@@ -37,7 +37,7 @@ class AutoCacheEasyService extends RedisService
     public function remember(string $key, callable $callback)
     {
         $key = $this->mountKey($key);
-        return $this->redis->get($key) ?? $this->save($key, $callback);
+        return $this->get($key) ?? $this->save($key, $callback);
     }
 
     /**
@@ -52,7 +52,7 @@ class AutoCacheEasyService extends RedisService
     public function retriver(string $key, callable $callback, $all = false)
     {
         $key = $this->mountKey($key);
-        $this->redis->forget($key, $all);
+        $this->forget($key, $all);
         return $this->save($key, $callback);
     }
 
@@ -66,7 +66,7 @@ class AutoCacheEasyService extends RedisService
     private function save(string $key, callable $callback)
     {
         $cache = call_user_func($callback);
-        $this->redis->set($key, $cache);
+        $this->set($key, $cache);
         return $cache;
     }
 
