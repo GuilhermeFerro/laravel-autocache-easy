@@ -87,3 +87,36 @@ autocacheeasy()->getAll($key)
 
 autocacheeasy()->forget($key, $wildcard = false) 
 ``` 
+
+### Package `ResponseView`
+`EN`
+- Response easy the dates from views 
+- add Trait `ResponseViewCache` in your Controller
+
+`PT-BR`
+- Forma fácil de adicionar dados para o response de views
+- Adicionar a trait `ResponseViewCache` no seu Controller
+
+- url: https://packagist.org/packages/gsferro/responseview
+
+``` php
+/**
+* Easily add an item to ResponseView :: $ data and cache it
+* Adicionar forma fácil um item ao ResponseView::$data e coloca no cache
+*
+* @param string $key
+* @param callable $value
+* @param string $action
+*/
+$this->addDataCache(string $key, callable $value, string $action = "remember")
+
+/**
+* Easily add an item to ResponseView::$mergeData and cache it
+* Adicionar forma fácil um item ao ResponseView::$mergeData e coloca no cache
+*
+* @param string $key
+* @param callable $value
+* @param string $action
+*/
+$this->addMergeDataCache(string $key, callable $value, string $action = "remember")
+``` 

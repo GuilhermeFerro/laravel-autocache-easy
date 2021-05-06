@@ -2,9 +2,12 @@
     "name": "gsferro/autocacheeasy",
     "description": "Package to perform the autocache in an easy way in Laravel with Redis\n",
     "type": "library",
-    "version": "1.0.0",
+    "keywords": [
+        "laravel", "redis", "cache", "autocache", "blade", "view", "response"
+    ],
     "require": {
-        "predis/predis": "1.*"
+        "predis/predis": "1.*",
+        "gsferro/responseview": "1.*"
     },
     "autoload": {
         "psr-4": {
