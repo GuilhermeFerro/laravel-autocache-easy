@@ -1,4 +1,5 @@
 <?php
+namespace Gsferro\AutoCacheEasy\Traits;
 
 use Gsferro\ResponseView\Traits\ResponseView;
 
