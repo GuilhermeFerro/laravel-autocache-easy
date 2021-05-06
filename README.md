@@ -18,7 +18,7 @@ composer require gsferro/autocacheeasy
 ```
 
 ### Use
-- Global instance
+- Global instance `autocacheeasy()`
  ``` php
 /**
 * Package instance
@@ -29,6 +29,17 @@ composer require gsferro/autocacheeasy
 * @return AutoCacheEasyService
 */
 $autocacheeasy = autocacheeasy();
+
+```
+
+- Alias `autocache()`
+``` php
+/**
+* Alias small for autocacheeasy().
+*
+* @return Gsferro\AutoCacheEasy\Services\AutoCacheEasyService
+*/
+$autocache = autocache();
 ```
 
 - Method Remember
