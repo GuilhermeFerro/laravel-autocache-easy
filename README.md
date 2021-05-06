@@ -99,6 +99,7 @@ autocacheeasy()->forget($key, $wildcard = false)
 
 - url: https://packagist.org/packages/gsferro/responseview
 
+- Method `addDataCache`
 ``` php
 /**
 * Easily add an item to ResponseView :: $ data and cache it
@@ -109,7 +110,10 @@ autocacheeasy()->forget($key, $wildcard = false)
 * @param string $action
 */
 $this->addDataCache(string $key, callable $value, string $action = "remember")
+```
 
+- Method `addMergeDataCache`
+``` php
 /**
 * Easily add an item to ResponseView::$mergeData and cache it
 * Adicionar forma fácil um item ao ResponseView::$mergeData e coloca no cache
@@ -119,4 +123,33 @@ $this->addDataCache(string $key, callable $value, string $action = "remember")
 * @param string $action
 */
 $this->addMergeDataCache(string $key, callable $value, string $action = "remember")
+```
+
+- Method `addDataOtherKeyCache`
+``` php
+/**
+* Easily add an item to ResponseView::$data and cache it
+* Adicionar forma fácil um item ao ResponseView::$data e coloca no cache
+*
+* @param string $key
+* @param string $keyCache
+* @param callable $value
+* @param string $action
+*/
+$this->addDataOtherKeyCache( string $key, string $keyCache, callable $value, string $action = "remember" )
+```
+
+- Method `addMergeDataOtherKeyCache`
+``` php
+
+/**
+* Easily add an item to ResponseView::$mergeData and cache it
+* Adicionar forma fácil um item ao ResponseView::$mergeData e coloca no cache
+*
+* @param string $key
+* @param string $keyCache
+* @param callable $value
+* @param string $action
+*/
+$this->addMergeDataOtherKeyCache( string $key, string $keyCache, callable $value, string $action = "remember" ) 
 ``` 
