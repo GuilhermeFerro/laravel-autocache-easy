@@ -44,29 +44,17 @@ $autocache = autocache();
 
 - Method Remember
 ``` php
-/**
-* Checks if the key exists in the redis cache, saves if it does not exist and returns the value
-* Verifica se existe a chave no cache do redis, salva se não existir e devolve o valor
-*
-* @param string $key
-* @param callable $callback
-* @return mixed
-*/
-autocacheeasy()->remember(string $key, callable $callback)
+autocacheeasy()->remember(string $key, $ttl, \Closure $callback)
+```
+
+- Method RememberForever
+``` php
+autocacheeasy()->remember(string $key, $ttl, \Closure $callback)
 ```
 
 - Method Retriver
 ``` php
-/**
-* Clear the current cache and save again
-* Limpa o cache atual e salva novamente
-*
-* @param string $key
-* @param callable $callback
-* @param bool $all
-* @return mixed
-*/
-autocacheeasy()->retriver(string $key, callable $callback, $all = false)
+autocacheeasy()->retriver(string $key, \Closure $callback, $all = false)
 ```
 
 ### Methods Packages Inspire/Dependencie
@@ -77,6 +65,17 @@ autocacheeasy()->retriver(string $key, callable $callback, $all = false)
 `PT-BR`
 - Ao usar este pacote, você ainda mantém todas as funções do pacote de dependência.
 
+##### Method Package Depedence `\Illuminate\Cache\CacheManager`
+`EN`
+- To access the cache directly
+
+`PT-BR`
+- Para ter acesso ao cache diretamente
+
+``` php
+autocacheeasy()->cache
+``` 
+
 ##### Method Package Depedence `predis/predis`
 `EN`
 - To access the predis directly
@@ -85,7 +84,7 @@ autocacheeasy()->retriver(string $key, callable $callback, $all = false)
 - Para ter acesso ao predis diretamente
 
 ``` php
-autocacheeasy()->redis()
+autocacheeasy()->redis
 ``` 
 ##### Method Package Inspire `amitavroy/rediscache`
 
@@ -118,9 +117,9 @@ autocacheeasy()->forget($key, $wildcard = false)
 *
 * @param string $key
 * @param callable $value
-* @param string $action
+* @param int $time 60
 */
-$this->addDataCache(string $key, callable $value, string $action = "remember")
+$this->addDataCache(string $key, callable value, int $time 60)
 ```
 
 - Method `addMergeDataCache`
@@ -131,9 +130,9 @@ $this->addDataCache(string $key, callable $value, string $action = "remember")
 *
 * @param string $key
 * @param callable $value
-* @param string $action
+* @param int $time 60
 */
-$this->addMergeDataCache(string $key, callable $value, string $action = "remember")
+$this->addMergeDataCache(string $key, callable value, int $time 60)
 ```
 
 - Method `addDataOtherKeyCache`
@@ -145,9 +144,9 @@ $this->addMergeDataCache(string $key, callable $value, string $action = "remembe
 * @param string $key
 * @param string $keyCache
 * @param callable $value
-* @param string $action
+* @param int $time 60
 */
-$this->addDataOtherKeyCache( string $key, string $keyCache, callable $value, string $action = "remember" )
+$this->addDataOtherKeyCache( string $key, string $keyCache, callable value, int $time 60 )
 ```
 
 - Method `addMergeDataOtherKeyCache`
@@ -160,7 +159,7 @@ $this->addDataOtherKeyCache( string $key, string $keyCache, callable $value, str
 * @param string $key
 * @param string $keyCache
 * @param callable $value
-* @param string $action
+* @param int $time 60
 */
-$this->addMergeDataOtherKeyCache( string $key, string $keyCache, callable $value, string $action = "remember" ) 
+$this->addMergeDataOtherKeyCache( string $key, string $keyCache, callable value, int $time 60 ) 
 ``` 

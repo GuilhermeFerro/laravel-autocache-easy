@@ -26,16 +26,19 @@ class RedisService
         $this->redis = new Client($connections);
     }
 
+    private static function keyWithPrefix($key)
+    {
+        return config('cache.prefix') .":{$key}";
+    }
+
     /**
      * @param $key
      * @return mixed
      */
     public function get($key)
     {
-        $data = $this->redis
-            ->pipeline()
-            ->get($key)
-            ->execute();
+        $key = self::keyWithPrefix($key);
+        $data = $this->getExecute($key);
 
         return json_decode($data[ 0 ]);
     }
@@ -47,6 +50,7 @@ class RedisService
      */
     public function set($key, $value)
     {
+        $key = self::keyWithPrefix($key);
         $value = json_encode($value);
 
         $this->redis->pipeline()->set($key, $value)->execute();
@@ -60,13 +64,14 @@ class RedisService
      */
     public function getAll($key)
     {
-        $keys = $this->redis->executeRaw(["KEYS", "{$key}*"]);
+        $key = self::keyWithPrefix($key);
+        $keys = $this->redis->executeRaw(["KEYS", "*{$key}*"]);
 
         $data = collect();
 
         foreach ($keys as $key) {
             $data->push([
-                $key => $this->get($key)
+                $key => $this->getExecute($key)
             ]);
         }
 
@@ -80,6 +85,8 @@ class RedisService
      */
     public function forget($key, $wildcard = false)
     {
+        $key = self::keyWithPrefix($key);
+
         if ($wildcard == true) {
             return $this->clearWildCard($key);
         }
@@ -105,9 +112,7 @@ class RedisService
      */
     private function clearWildCard($key)
     {
-        $keys = $this->redis
-            ->executeRaw(["KEYS", "{$key}*"]);
-
+        $keys = $this->redis->executeRaw(["KEYS", "*{$key}*"]);
         if (count($keys) == 0) {
             return false;
         }
@@ -116,5 +121,19 @@ class RedisService
             ->pipeline()
             ->del($keys)
             ->execute();
+    }
+
+    /**
+     * @param $key
+     * @return array
+     * @throws \Exception
+     */
+    private function getExecute($key): array
+    {
+        $data = $this->redis
+            ->pipeline()
+            ->get($key)
+            ->execute();
+        return $data;
     }
 }

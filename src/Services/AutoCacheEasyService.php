@@ -2,42 +2,24 @@
 
 namespace Gsferro\AutoCacheEasy\Services;
 
-use Predis\Client;
+use Illuminate\Support\Facades\Cache;
 
 class AutoCacheEasyService extends RedisService
 {
-    private $keyPrefix;
-    private $keyPrefixSeparetor;
+    public $cache;
 
     /**
      * Package instance
      * AutoCacheEasyService constructor.
      *
-     * @param string|null $keyPrefix
-     * @param string $keyPrefixSeparetor default ':'
      * @return  $this
      */
-    public function __construct(string $keyPrefix = null, string $keyPrefixSeparetor = ':')
+    public function __construct()
     {
         parent::__construct();
-        $this->keyPrefix          = $keyPrefix;
-        $this->keyPrefixSeparetor = $keyPrefixSeparetor;
+        $this->cache = cache();
 
         return $this;
-    }
-
-    /**
-     * Checks if the key exists in the redis cache, saves if it does not exist and returns the value
-     * Verifica se existe a chave no cache do redis, salva se não existir e devolve o valor
-     *
-     * @param string $key
-     * @param callable $callback
-     * @return mixed 'cache or callable runnig'
-     */
-    public function remember(string $key, callable $callback)
-    {
-        $key = $this->mountKey($key);
-        return $this->get($key) ?? $this->save($key, $callback);
     }
 
     /**
@@ -51,39 +33,32 @@ class AutoCacheEasyService extends RedisService
      */
     public function retriver(string $key, callable $callback, $all = false)
     {
-        $key = $this->mountKey($key);
-        $this->forget($key, $all);
-        return $this->save($key, $callback);
+        $this->forgetRedis($key, $all);
+        return $this->add($key, $callback);
     }
 
-    /**
-     * executa a callback e sava no redis
-     *
-     * @param string $key
-     * @param callable $callback
-     * @return mixed
-     */
-    private function save(string $key, callable $callback)
+    /*
+    |---------------------------------------------------
+    | Metodos cache() mais usados
+    |---------------------------------------------------
+    */
+    public function has(string $key)
     {
-        $cache = call_user_func($callback);
-        $this->set($key, $cache);
-        return $cache;
+        return $this->cache->has($key);
     }
 
-    /**
-     * montar a key caso aja um prefixo
-     *
-     * @param $key
-     * @return string
-     */
-    private function mountKey($key): string
+    public function add(string $key, $value)
     {
-        $key = env('REDIS_PREFIX_GLOBAL', null) . $key;
+        return $this->cache->add($key, $value);
+    }
 
-        if (is_null($this->keyPrefix)) {
-            return $key;
-        }
+    public function remember(string $key, $ttl, \Closure $callback)
+    {
+        return $this->cache->remember($key, $ttl, $callback);
+    }
 
-        return "{$this->keyPrefix}{$this->keyPrefixSeparetor}{$key}";
+    public function rememberForever(string $key, \Closure $callback)
+    {
+        return $this->cache->rememberForever($key, $callback);
     }
 }

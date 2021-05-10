@@ -14,11 +14,11 @@ trait ResponseViewCache
      *
      * @param string $key
      * @param callable $value
-     * @param string $action
+     * @param int $time 60
      */
-    private function addDataCache(string $key, callable $value, string $action = "remember")
+    private function addDataCache(string $key, callable $value, int $time = 60)
     {
-        $this->addData($key, autocacheeasy()->$action($key, $value));
+        $this->addData($key, autocacheeasy()->remember($key, $time, $value));
     }
 
     /**
@@ -28,15 +28,15 @@ trait ResponseViewCache
      * @param string $key
      * @param string $keyCache
      * @param callable $value
-     * @param string $action
+     * @param int $time 60
      */
     private function addDataOtherKeyCache(
         string $key,
         string $keyCache,
         callable $value,
-        string $action = "remember"
+        int $time = 60
     ) {
-        $this->addData($key, autocacheeasy()->$action($keyCache, $value));
+        $this->addData($key, autocacheeasy()->remember($keyCache, $time, $value));
     }
 
     /**
@@ -45,11 +45,14 @@ trait ResponseViewCache
      *
      * @param string $key
      * @param callable $value
-     * @param string $action
+     * @param int $time 60
      */
-    private function addMergeDataCache(string $key, callable $value, string $action = "remember")
-    {
-        $this->addMergeData($key, autocacheeasy()->$action($key, $value));
+    private function addMergeDataCache(
+        string $key,
+        callable $value,
+        int $time = 60
+    ) {
+        $this->addMergeData($key, autocacheeasy()->remember($key, $time, $value));
     }
 
     /**
@@ -59,14 +62,14 @@ trait ResponseViewCache
      * @param string $key
      * @param string $keyCache
      * @param callable $value
-     * @param string $action
+     * @param int $time 60
      */
     private function addMergeDataOtherKeyCache(
         string $key,
         string $keyCache,
         callable $value,
-        string $action = "remember"
+        int $time = 60
     ) {
-        $this->addMergeData($key, autocacheeasy()->$action($keyCache, $value));
+        $this->addMergeData($key, autocacheeasy()->remember($keyCache, $time, $value));
     }
 }

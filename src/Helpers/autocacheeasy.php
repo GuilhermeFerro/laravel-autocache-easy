@@ -15,7 +15,7 @@ if ( ! function_exists('autocacheeasy')) {
 if ( ! function_exists('autocache')) {
     /**
      * Alias small for autocacheeasy().
-     *
+     * @see autocacheeasy()
      * @return Gsferro\AutoCacheEasy\Services\AutoCacheEasyService
      */
     function autocache()
