@@ -33,7 +33,7 @@ class AutoCacheEasyService extends RedisService
      */
     public function retriver(string $key, callable $callback, $all = false)
     {
-        $this->forgetRedis($key, $all);
+        $this->forget($key, $all);
         return $this->add($key, $callback);
     }
 
